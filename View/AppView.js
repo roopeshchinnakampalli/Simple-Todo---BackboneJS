@@ -1,8 +1,16 @@
 //Backbone Collection
 /*jslint nomen:true*/
-/*global Backbone,Model,$,ListView,_*/
-var AppView = Backbone.View.extend({
+/*global Backbone,Model,$,ListView,_,Collection,TodoApp*/
+
+var TodoApp = TodoApp || {};
+   
+TodoApp.AppView = Backbone.View.extend({
     el: '#appHolder',
+
+    initialize: function () {
+        "use strict";
+        this.listCollection = new TodoApp.Collection();
+    },
 
     events: {
         'click #btnAdd': 'addListItem',
@@ -12,23 +20,24 @@ var AppView = Backbone.View.extend({
     addListItem: function () {
         "use strict";
         var $taskName = $('#taskName'),
-            model = new Model(),
+            model = null,
             listView = null;
-        
+
         if (_.isEmpty($taskName.val())) {
             return;
         }
-        
+        model = new TodoApp.Model();
         model.set("taskName", $taskName.val());
 
-        listView = new ListView({
+        this.listCollection.add(model);
+
+        listView = new TodoApp.ListView({
             model: model
         });
 
-        listView.render();
+        $('#listHolder').append(listView.render().el);
 
-        $taskName.val("");
-        $taskName.focus();
+        $taskName.val("").focus();
     },
 
     updateOnEnter: function (event) {
@@ -41,8 +50,8 @@ var AppView = Backbone.View.extend({
 
     render: function () {
         "use strict";
-        var html = $('#mytemplate').html();
-        this.$el.append(html);
+        this.$el.append($('#mytemplate').html());
     }
 
 });
+

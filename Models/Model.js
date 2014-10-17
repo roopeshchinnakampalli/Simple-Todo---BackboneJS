@@ -1,6 +1,7 @@
 //Backbone Model
 /*global Backbone*/
-var Model = Backbone.Model.extend({
+var TodoApp = TodoApp || {};
+TodoApp.Model = Backbone.Model.extend({
     defaults: {
         taskName: ""
     }

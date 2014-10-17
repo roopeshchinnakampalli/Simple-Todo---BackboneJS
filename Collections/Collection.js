@@ -1,5 +1,6 @@
 //Backbone Collection
 /*global Backbone,Model*/
-var Collection = Backbone.Collection.extend({
-    model: Model
+var TodoApp = TodoApp || {};
+TodoApp.Collection = Backbone.Collection.extend({
+    model: TodoApp.Model
 });
