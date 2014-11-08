@@ -34,7 +34,7 @@ TodoApp.AppView = Backbone.View.extend({
         listView = new TodoApp.ListView({
             model: model
         });
-
+        
         $('#listHolder').append(listView.render().el);
 
         $taskName.val("").focus();
@@ -43,14 +43,14 @@ TodoApp.AppView = Backbone.View.extend({
     updateOnEnter: function (event) {
         "use strict";
         if (event.keyCode === 13 && !_.isEmpty($(event.target).val())) {
-            $('#btnAdd').trigger("click");
+            this.addListItem();
         }
 
     },
 
     render: function () {
         "use strict";
-        this.$el.append($('#mytemplate').html());
+        this.$el.html($('#mytemplate').html());
     }
 
 });
